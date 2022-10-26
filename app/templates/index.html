@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block head %}
+<script defer src="{{ url_for('static', filename='js/navigateArticles.js') }}"></script>
+{% endblock %}
+{% block content %}
+
+{% for post in posts %}
+    <h2>{{ post.title }}</h2>
+    <div data-link="/{{post.author.username}}/{{ post.url }}" >
+        {% if post.content_html %}
+            {{ post.content_html | safe }}
+        {% else %}
+            {{ post.content }}
+        {% endif %}
+    </div>
+{% endfor %}
+    
+{% if prev_url %}
+    <a href="{{ prev_url }}">Newer posts</a>
+{% endif %}
+
+{% if next_url %}
+    <a href="{{ next_url }}">Older posts</a>
+{% endif %}
+
+{% endblock %}

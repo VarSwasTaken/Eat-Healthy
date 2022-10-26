@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% if post %}
+<h2>{{ post.title }}</h2>
+<p>{{ post.timestamp }} {{ post.author.username }}</p>
+<div>
+    {% if post.content_html %}
+        {{ post.content_html | safe }}
+    {% else %}
+        {{ post.content }}
+    {% endif %}
+</div>
+{% endif %}
+
+{% endblock %}
