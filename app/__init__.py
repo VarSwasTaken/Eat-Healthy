@@ -6,6 +6,7 @@ from flask_migrate import Migrate
 
 from flask_pagedown import PageDown
 
+from flask_migrate import Migrate
 from flask_login import LoginManager
 
 app = Flask(__name__)
@@ -19,4 +20,4 @@ pagedown = PageDown(app)
 login = LoginManager(app)
 login.login_view = 'login'
 
-from app import router
+from app import routes
