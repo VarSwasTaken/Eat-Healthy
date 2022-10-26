@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <main class="profile">
+        <img class="avatar" src="{{ url_for('static', filename='img/photo.png') }}" alt="user avatar"> 
+        <div class="user-info">
+            <h1>{{user.username}}</h1>
+            <div>
+                <h2>Account created:</h2>
+                <h2>{{user.format_date()}}</h2>
+            </div>
+        </div>
+        <div class="user-articles">
+            <h1>Articles:</h1>
+        </div>
+    </main>
+{% endblock %}
