@@ -1,9 +1,10 @@
+from importlib.resources import path
 from flask import render_template, flash, redirect, request, url_for, send_file
+from jinja2 import Undefined
 from app import app
 from app.db import db
 from app.forms import LoginForm, RegistrationForm, CreatePostForm
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User
 from werkzeug.urls import url_parse
 from io import BytesIO
 
@@ -61,7 +62,7 @@ def profile(username):
     # ]
 
     page = request.args.get('page', 1, type=int)
-    posts = Post.query.join(User).filter_by(username=author).order_by(Post.timestamp.desc()).paginate(
+    posts = Post.query.join(User).filter_by(username=username).order_by(Post.timestamp.desc()).paginate(
         page=page, per_page=app.config['POSTS_PER_PAGE'], error_out=False)
 
     next_url = username + '?page=' + str(posts.next_num) \
@@ -124,11 +125,14 @@ def register():
         return redirect(url_for('index'))
     form = RegistrationForm()
     if form.validate_on_submit():
+        # photo = Undefined
+        # with open(os.path.dirname('static/img/default_logo.png'), 'rb') as file:
+        #     photo = file.read()
         user = User(username=form.username.data, email=form.email.data)
         user.set_password(form.password.data)
-        user.set_photo("C:/Users/user/Desktop/Eat Healthy/app/static/img/default_logo.png")
+        # user.set_photo(url_for('static', filename='img/default_logo.png'))
         db.session.add(user)
         db.session.commit()
+        login_user(user)
         return redirect(url_for('index'))
     return render_template('register.html', title='Register', form=form)
-
