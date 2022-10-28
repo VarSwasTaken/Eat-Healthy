@@ -31,7 +31,7 @@ def index():
 def post():
     form = CreatePostForm()
     if form.validate_on_submit():
-        post = Post(title=form.title.data,  url=form.url.data, content=form.post.data, author=current_user)
+        post = Post(title=form.title.data, description=form.description.data, url=form.url.data, content=form.content.data, author=current_user)
         try:
             db.session.add(post)
             db.session.commit()
@@ -79,12 +79,12 @@ def edit(author, url):
     form = CreatePostForm()
     post = Post.query.filter_by(url=url).join(User).filter_by(username=author).first()
     if request.method == 'GET':
-        form.post.data = post.content_html
+        form.content.data = post.content_html
     if form.validate_on_submit():
-        post.title=form.title.data
-        post.url=form.url.data
-        print(form.post.data)
-        post.content=form.post.data
+        post.title = form.title.data
+        post.description = form.description.data
+        post.url = form.url.data
+        post.content = form.content.data
         db.session.commit()
 
 

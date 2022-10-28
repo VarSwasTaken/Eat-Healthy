@@ -7,8 +7,9 @@ from app.models.user import User
 
 class CreatePostForm(FlaskForm):
     title = StringField('Post title', validators=[DataRequired()])
+    description = StringField('Description', validators=[DataRequired()])
     url = StringField('URL', validators=[DataRequired()])
-    post = PageDownField('Post content', validators=[DataRequired()])
+    content = PageDownField('Post content', validators=[DataRequired()])
     submit = SubmitField('add post')
 
 class LoginForm(FlaskForm):

@@ -6,8 +6,12 @@
 
 {% if post %}
 {% set title = post.title %}
+{% set description = post.description %}
 {% set url = post.url %}
+<<<<<<< HEAD
 <!-- {% set content = post.content %} -->
+=======
+>>>>>>> 80a6b9adaa323eeb47bd162dcd0fc54e06f81101
 {% endif %}
 
 {% block content %}
@@ -21,6 +25,13 @@
   <span style="color: red">[{{ error }}]</span>
   {% endfor %}
 
+  {{ form.description.label }} <br>
+  {{ form.description(value=description) }}<br>
+
+  {% for error in form.description.errors %}
+  <span style="color: red">[{{ error }}]</span>
+  {% endfor %} 
+
   {{ form.url.label }}<br>
   {{ form.url(value=url) }}<br>
 
@@ -28,10 +39,15 @@
   <span style="color: red">[{{ error }}]</span>
   {% endfor %}
 
+<<<<<<< HEAD
   {{ form.post.label }}<br>
   {{ form.post }}<br>
+=======
+  {{ form.content.label }}<br>
+  {{ form.content }}<br>
+>>>>>>> 80a6b9adaa323eeb47bd162dcd0fc54e06f81101
 
-  {% for error in form.post.errors %}
+  {% for error in form.content.errors %}
   <span style="color: red">[{{ error }}]</span>
   {% endfor %}
   
