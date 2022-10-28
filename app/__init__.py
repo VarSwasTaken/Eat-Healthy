@@ -1,3 +1,6 @@
+# from app import routes
+from app.main import bp as main_bp
+from app.auth import bp as auth_bp
 from flask import Flask
 from config import Config
 
@@ -18,6 +21,10 @@ migrate = Migrate(app, db)
 pagedown = PageDown(app)
 
 login = LoginManager(app)
-login.login_view = 'login'
+login.login_view = 'auth.login'
 
-from app import routes, errors
+app.register_blueprint(auth_bp, url_prefix='/auth')
+
+app.register_blueprint(main_bp)
+
+from app import errors

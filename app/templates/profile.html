@@ -14,7 +14,7 @@
                 <h2 class="account-create-date">{{ user.format_date() }}</h2>
             </div>
         </div>
-        <a href="{{ url_for('logout') }}">Logout</a>
+        <a href="{{ url_for('auth.logout') }}">Logout</a>
         <div class="user-articles">
             <h1 class="profile-heading">Articles:</h1>
             {% for post in posts %}
