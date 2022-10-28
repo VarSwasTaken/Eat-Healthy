@@ -5,13 +5,18 @@ from datetime import datetime
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    post = db.Column(db.Text)
+    title = db.Column(db.Text)
+    description = db.Column(db.String(100))
     url = db.Column(db.String(100), unique=True)
     content = db.Column(db.Text)
     content_html = db.Column(db.Text)
-    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    article_published = db.Column(db.DateTime, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     published = db.Column(db.Boolean, default=False)
+
+    def format_date(self):
+        string = self.article_published.strftime("%d-%m-%Y")
+        return string
 
     @staticmethod
     def on_changed_body(target, value, oldvalue, initiator):

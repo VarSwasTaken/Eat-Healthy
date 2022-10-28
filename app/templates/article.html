@@ -3,7 +3,7 @@
 
 {% if post %}
 <h2>{{ post.title }}</h2>
-<p>{{ post.timestamp }} {{ post.author.username }}</p>
+<p>{{ post.article_published }} {{ post.author.username }}</p>
 <div>
     {% if post.content_html %}
         {{ post.content_html | safe }}

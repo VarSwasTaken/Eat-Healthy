@@ -27,8 +27,8 @@
         <a href="{{ url_for('login') }}">
             <img id="user" src="{{ url_for('static', filename='img/person-fill.svg') }}" alt="user icon">
         {% else %}
-        <a href="{{ url_for('profile', username=current_user.username) }}">
-            <img id="user" src="{{ url_for('static', filename='img/person-fill.svg') }}" alt="user icon">
+        <a id="avatar-circle" href="{{ url_for('profile', username=current_user.username) }}">
+            <img id="nav-avatar" src="{{ url_for('static', filename='img/photo.png') }}" alt="user avatar">
             <!-- <img id="user" src="data:image/png;base64{{current_user.avatar}}" alt="user avatar"> -->
         {% endif %}
         </a>
