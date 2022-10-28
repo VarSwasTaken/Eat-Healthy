@@ -2,9 +2,9 @@
 
 {% block content %}
     <main class="error-page">
-        <h1 class="error-number">500</h1>
-        <h3 class="page-error-sub">Internal Server Error</h3>
-        <span class="page-error-content">Sorry, there were some technical issues while processing your request.</span>
+        <h1 class="error-number">403</h1>
+        <h3 class="page-error-sub">Forbidden</h3>
+        <span class="page-error-content">The page you were trying to reach has restricted access. Contact website administrator if you think it's a mistake.</span>
         <a href="{{ url_for('index') }}">
             <button class="error-back">HOME</button>
         </a>
