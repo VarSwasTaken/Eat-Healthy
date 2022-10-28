@@ -1,29 +1,35 @@
 {% extends 'base.html' %}
+
 {% block head %}
 {{ pagedown.html_head() }}
 {% endblock %}
 
-{% block content %}
+{% if post %}
+{% set title = post.title %}
+{% set url = post.url %}
+{% set content = post.content %}
+{% endif %}
 
-<form method="POST" action="" novalidate>
+{% block content %}
+<form method="POST" action='' novalidate>
   {{form.hidden_tag()}}
 
   {{ form.title.label }} <br>
-  {{ form.title }}<br>
+  {{ form.title(value=title) }}<br>
 
   {% for error in form.title.errors %}
   <span style="color: red">[{{ error }}]</span>
   {% endfor %}
 
   {{ form.url.label }}<br>
-  {{ form.url }}<br>
+  {{ form.url(value=url) }}<br>
 
   {% for error in form.url.errors %}
   <span style="color: red">[{{ error }}]</span>
   {% endfor %}
 
   {{ form.post.label }}<br>
-  {{ form.post }}<br>
+  {{ form.post(value=content) }}<br>
 
   {% for error in form.post.errors %}
   <span style="color: red">[{{ error }}]</span>
@@ -31,4 +37,4 @@
   
   {{ form.submit() }}
 </form>
- {% endblock %}
+{% endblock %}

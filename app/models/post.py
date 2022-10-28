@@ -5,7 +5,7 @@ from datetime import datetime
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    post = db.Column(db.Text)
+    title = db.Column(db.Text)
     url = db.Column(db.String(100), unique=True)
     content = db.Column(db.Text)
     content_html = db.Column(db.Text)

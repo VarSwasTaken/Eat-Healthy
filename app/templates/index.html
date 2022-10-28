@@ -5,6 +5,7 @@
 {% block content %}
 
 {% for post in posts %}
+{% if post.published %}
     <h2>{{ post.title }}</h2>
     <div data-link="/{{post.author.username}}/{{ post.url }}" >
         {% if post.content_html %}
@@ -13,6 +14,7 @@
             {{ post.content }}
         {% endif %}
     </div>
+{% endif %}
 {% endfor %}
     
 {% if prev_url %}
