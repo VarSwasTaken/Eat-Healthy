@@ -23,6 +23,7 @@
             <h1>Eat Healthy</h1>
         </a>
         <input type="search" placeholder="Search...">
+        
         {% if current_user.is_anonymous %}
         <a href="{{ url_for('login') }}">
             <img id="user" src="{{ url_for('static', filename='img/person-fill.svg') }}" alt="user icon">

@@ -2,7 +2,13 @@
 {% block head %}
 <script defer src="{{ url_for('static', filename='js/navigateArticles.js') }}"></script>
 {% endblock %}
+
 {% block content %}
+<h1>Most recent articles</h1>
+{% if not current_user.is_anonymous %}
+<a href="{{ url_for('post')}}">Add an article</a>
+{% endif %}
+
 
 {% for post in posts %}
 {% if post.published %}

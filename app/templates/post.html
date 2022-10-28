@@ -7,7 +7,7 @@
 {% if post %}
 {% set title = post.title %}
 {% set url = post.url %}
-{% set content = post.content %}
+<!-- {% set content = post.content %} -->
 {% endif %}
 
 {% block content %}
@@ -29,7 +29,7 @@
   {% endfor %}
 
   {{ form.post.label }}<br>
-  {{ form.post(value=content) }}<br>
+  {{ form.post }}<br>
 
   {% for error in form.post.errors %}
   <span style="color: red">[{{ error }}]</span>
