@@ -1,5 +1,5 @@
 from importlib.resources import path
-from flask import render_template, flash, redirect, request, url_for, send_file
+from flask import render_template, flash, redirect, request, url_for, send_file, abort
 from jinja2 import Undefined
 from app import app
 from app.db import db
@@ -86,13 +86,10 @@ def edit(author, url):
         post.url = form.url.data
         post.content = form.content.data
         db.session.commit()
-
-
         if current_user.admin:
             return redirect(url_for('admin'))
         return redirect(url_for('article', author=current_user.username, url=post.url))
     return render_template('post.html', form=form, post=post)
-    
 
 
 @app.route('/<author>/<url>/publish')

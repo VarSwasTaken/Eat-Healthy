@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <main class="error-page">
+        <h1 class="error-number">{{ error_code }}</h1>
+        <h3 class="page-error-sub">{{ error_type }}</h3>
+        <span class="page-error-content">{{ error_description }}</span>
+        <a href="{{ url_for('index') }}">
+            <button class="error-back">HOME</button>
+        </a>
+    </main>
+{% endblock %}

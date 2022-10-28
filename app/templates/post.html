@@ -8,10 +8,6 @@
 {% set title = post.title %}
 {% set description = post.description %}
 {% set url = post.url %}
-<<<<<<< HEAD
-<!-- {% set content = post.content %} -->
-=======
->>>>>>> 80a6b9adaa323eeb47bd162dcd0fc54e06f81101
 {% endif %}
 
 {% block content %}
@@ -19,36 +15,31 @@
   {{form.hidden_tag()}}
 
   {{ form.title.label }} <br>
-  {{ form.title(value=title) }}<br>
+  {{ form.title(size=32, value=title) }}<br>
 
   {% for error in form.title.errors %}
-  <span style="color: red">[{{ error }}]</span>
+  <span class="error">{{ error }}</span>
   {% endfor %}
 
   {{ form.description.label }} <br>
-  {{ form.description(value=description) }}<br>
+  {{ form.description(size=32, value=description) }}<br>
 
   {% for error in form.description.errors %}
-  <span style="color: red">[{{ error }}]</span>
-  {% endfor %} 
-
-  {{ form.url.label }}<br>
-  {{ form.url(value=url) }}<br>
-
-  {% for error in form.url.errors %}
-  <span style="color: red">[{{ error }}]</span>
+  <span class="error">{{ error }}</span>
   {% endfor %}
 
-<<<<<<< HEAD
-  {{ form.post.label }}<br>
-  {{ form.post }}<br>
-=======
+  {{ form.url.label }}<br>
+  {{ form.url(size=32, value=url) }}<br>
+
+  {% for error in form.url.errors %}
+  <span class="error">{{ error }}</span>
+  {% endfor %}
+
   {{ form.content.label }}<br>
   {{ form.content }}<br>
->>>>>>> 80a6b9adaa323eeb47bd162dcd0fc54e06f81101
 
   {% for error in form.content.errors %}
-  <span style="color: red">[{{ error }}]</span>
+  <span class="error">{{ error }}</span>
   {% endfor %}
   
   {{ form.submit() }}

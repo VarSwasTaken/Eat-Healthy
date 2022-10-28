@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="form-content">
+    <main class="form-content">
         <h1>Sign In</h1>
         <form action="" method="post" novalidate>
             {{ form.hidden_tag() }}
@@ -28,5 +28,5 @@
             </div>
         </form>
         <a id="register" href="{{ url_for('register') }}">New User? Register now!</a>
-    </div>
+    </main>
 {% endblock %}

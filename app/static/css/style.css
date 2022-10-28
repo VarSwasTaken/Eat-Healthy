@@ -33,6 +33,11 @@
     box-sizing: border-box;
 }
 
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
 a:visited, a:link, a:active {
     text-decoration: none;
 }
@@ -40,6 +45,12 @@ a:visited, a:link, a:active {
 a:hover {
     text-decoration: underline;
 }
+
+/* body {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+} */
 
 nav {
     display: flex;
@@ -189,8 +200,13 @@ div.hor-center {
     cursor: pointer;
 }
 
-.form-content form span.error {
+.form-content form input[type="submit"]:hover {
+    background-color: var(--clr-darkerGreen26);
+}
+
+.error {
     color: var(--clr-red);
+    font-weight: var(--fnt-semiBold600);
 }
 
 .form-content form div.hor-center label{
@@ -276,6 +292,48 @@ main.profile span.article-description {
     /* max-height: 100px; */
     max-height: 100px;
     font-size: var(--fnt-small14);
+}
+
+main.error-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    gap: var(--spc-big);
+}
+
+.error-number {
+    font-size: 10rem;
+    color: var(--clr-darkerGreen26);
+    line-height: 8rem;
+}
+
+.page-error-sub {
+    font-size: var(--fnt-big24);
+    color: var(--clr-darkerGreen26);
+    line-height: 1.5rem;
+}
+
+.page-error-content {
+    font-size: var(--fnt-small14);
+    margin-bottom: 0.2rem;
+}
+
+.error-back {
+    background-color: var(--clr-darkGreen48);
+    color: var(--clr-white);
+    font-size: var(--fnt-default16);
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    width: 100%;
+    font-weight: var(--fnt-semiBold600);
+    padding: var(--spc-medium) var(--spc-big);
+}
+
+.error-back:hover {
+    background-color: var(--clr-darkerGreen26);
 }
 
 /* Extra small devices (phones, 600px and down) */
