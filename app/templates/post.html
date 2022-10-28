@@ -15,16 +15,17 @@
   {{form.hidden_tag()}}
 
   {{ form.title.label }} <br>
-  {{ form.title(value=title) }}<br>
+  {{ form.title(size=32, value=title) }}<br>
 
   {% for error in form.title.errors %}
-  <span style="color: red">[{{ error }}]</span>
+  <span class="error">{{ error }}</span>
   {% endfor %}
 
   {{ form.description.label }} <br>
-  {{ form.description(value=description) }}<br>
+  {{ form.description(size=32, value=description) }}<br>
 
   {% for error in form.description.errors %}
+<<<<<<< HEAD
   <span style="color: red">[{{ error }}]</span>
   {% endfor %}
 
@@ -33,13 +34,23 @@
 
   {% for error in form.url.errors %}
   <span style="color: red">[{{ error }}]</span>
+=======
+  <span class="error">{{ error }}</span>
+  {% endfor %}
+
+  {{ form.url.label }}<br>
+  {{ form.url(size=32, value=url) }}<br>
+
+  {% for error in form.url.errors %}
+  <span class="error">{{ error }}</span>
+>>>>>>> bb1a71411e18f4fdd617de1d1e6938c869c4f323
   {% endfor %}
 
   {{ form.content.label }}<br>
   {{ form.content }}<br>
 
   {% for error in form.content.errors %}
-  <span style="color: red">[{{ error }}]</span>
+  <span class="error">{{ error }}</span>
   {% endfor %}
   
   {{ form.submit() }}

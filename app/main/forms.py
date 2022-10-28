@@ -6,8 +6,15 @@ from flask_pagedown.fields import PageDownField
 
 
 class CreatePostForm(FlaskForm):
-    title = StringField('Post title', validators=[DataRequired()])
-    description = StringField('Description', validators=[DataRequired()])
+    title = StringField('Post title', validators=[
+        DataRequired(message="Title required")
+    ])
+    description = StringField('Description', validators=[
+        DataRequired(message="Description required")
+    ])
     url = StringField('URL', validators=[DataRequired()])
-    content = PageDownField('Post content', validators=[DataRequired()])
-    submit = SubmitField('add post')
+    content = PageDownField('Post content', validators=[
+        DataRequired(message="URL required")
+    ])
+    submit = SubmitField('Add post')
+

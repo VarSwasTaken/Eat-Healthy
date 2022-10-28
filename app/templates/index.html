@@ -1,14 +1,24 @@
 {% extends 'base.html' %}
 {% block head %}
-<script defer src="{{ url_for('static', filename='js/navigateArticles.js') }}"></script>
+    <script defer src="{{ url_for('static', filename='js/navigateArticles.js') }}"></script>
 {% endblock %}
 
 {% block content %}
+<<<<<<< HEAD
 <h1>Most recent articles</h1>
 {% if not current_user.is_anonymous %}
 <a href="{{ url_for('main.post')}}">Add an article</a>
 {% endif %}
 
+=======
+    <h1>Most recent articles</h1>
+    {% if not current_user.is_anonymous %}
+    <a href="{{ url_for('post') }}">
+    {% else %}
+    <a href="{{ url_for('login') }}">
+    {% endif %}
+    Add an article</a>
+>>>>>>> bb1a71411e18f4fdd617de1d1e6938c869c4f323
 
 {% for post in posts %}
 {% if post.published %}

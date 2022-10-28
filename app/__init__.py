@@ -26,3 +26,5 @@ login.login_view = 'auth.login'
 app.register_blueprint(auth_bp, url_prefix='/auth')
 
 app.register_blueprint(main_bp)
+
+from app import errors
