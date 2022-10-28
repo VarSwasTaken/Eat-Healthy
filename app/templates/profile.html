@@ -1,26 +1,38 @@
 {% extends "base.html" %}
 
+{% block head %}
+    <script defer src="{{ url_for('static', filename='js/navigateArticles.js') }}"></script>
+{% endblock %}
+
 {% block content %}
     <main class="profile">
         <img class="avatar" src="{{ url_for('static', filename='img/photo.png') }}" alt="user avatar">
         <div class="user-info">
-            <h1>{{user.username}}</h1>
+            <h1 class="profile-heading">{{user.username}}</h1>
             <div>
-                <h2>Account created:</h2>
-                <h2>{{user.format_date()}}</h2>
+                <h2 class="account-create-date">Account created:</h2>
+                <h2 class="account-create-date">{{ user.format_date() }}</h2>
             </div>
         </div>
+        <a href="{{ url_for('logout') }}">Logout</a>
         <div class="user-articles">
-            <h1>Articles:</h1>
+            <h1 class="profile-heading">Articles:</h1>
             {% for post in posts %}
-                <h2>{{ post.title }}</h2>
-                <div data-link="/{{post.author.username}}/{{ post.url }}" >
-                    {% if post.content_html %}
-                        {{ post.content_html | safe }}
-                    {% else %}
-                        {{ post.content }}
-                    {% endif %}
+            <article data-link="/{{post.author.username}}/{{post.url}}">
+                <img class="article-cover" src="{{ url_for('static', filename='img/photo.png') }}" alt="article cover">
+                <div>
+                    <h2 class="article-title">{{ post.title }}</h2>
+                    <h3 class="article-create-date">{{ post.format_date() }}</h3>
+                    <span class="article-description">{{ post.description }}</span>
                 </div>
+            </article>
+                    <!-- <div data-link="/{{post.author.username}}/{{ post.url }}" >
+                        {% if post.content_html %}
+                            {{ post.content_html | safe }}
+                        {% else %}
+                            {{ post.content }}
+                        {% endif %}
+                    </div> -->
             {% endfor %}
                 
             {% if prev_url %}

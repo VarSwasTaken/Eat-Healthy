@@ -9,6 +9,8 @@
     --clr-gray: #f1f1f1;
     --clr-white: #ffffff;
     /* font sizes */
+    --fnt-tiny12: 0.75rem;
+    --fnt-small14: 0.875rem;
     --fnt-default16: 1rem;
     --fnt-big24: 1.5rem;
     /* font weights */
@@ -98,6 +100,16 @@ nav input[type="search"]::-ms-input-placeholder { /* Microsoft Edge */
 
 nav img#user {
     height: 30px;
+}
+
+nav img#nav-avatar {
+    height: 40px;
+    border: 3px solid var(--clr-white);
+    border-radius: 50px;
+}
+
+nav a#avatar-circle {
+    display: flex;
 }
 
 /* clears the ‘X’ from Internet Explorer */
@@ -211,18 +223,32 @@ main.profile {
 }
 
 main.profile img.avatar {
-    width: 270px;
+    width: 200px;
 }
 
-main.profile h1 {
+main.profile h1.profile-heading {
     font-size: var(--fnt-big24);
     font-weight: var(--fnt-bold700);
 }
 
-main.profile h2 {
+main.profile h2.account-create-date {
     font-size: var(--fnt-default16);
     color: var(--clr-darkerGreen26);
     font-weight: var(--fnt-semiBold600);
+}
+
+main.profile h2.article-title {
+    font-size: var(--fnt-default16);
+}
+
+main.profile h3.article-create-date {
+    font-size: var(--fnt-small14);
+    color: var(--clr-darkerGreen26);
+}
+
+main.profile img.article-cover {
+    width: 60px;
+    border-radius: 5px;
 }
 
 main.profile > div {
@@ -230,6 +256,26 @@ main.profile > div {
     flex-direction: column;
     width: 100%;
     gap: var(--spc-medium);
+}
+
+main.profile article {
+    display: flex;
+    gap: var(--spc-medium);
+    align-items: center;
+    cursor: pointer;
+    width: fit-content;
+}
+
+main.profile div.article:hover h2, 
+main.profile div.article:hover h3 {
+    text-decoration: underline;
+}
+
+main.profile span.article-description {
+    display: none;
+    /* max-height: 100px; */
+    max-height: 100px;
+    font-size: var(--fnt-small14);
 }
 
 /* Extra small devices (phones, 600px and down) */
@@ -240,12 +286,16 @@ main.profile > div {
     nav a#home h1 {
         display: block;
     }
+    main.profile img.article-cover {
+        width: 100px;
+    }
+    main.profile span.article-description {
+        display: inline-block;
+    }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {
-
-}
+@media only screen and (min-width: 768px) {}
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {}
