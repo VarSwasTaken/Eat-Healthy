@@ -18,17 +18,17 @@
 </head>
 <body>
     <nav>
-        <a id="home" href="{{ url_for('index') }}">
+        <a id="home" href="{{ url_for('main.index') }}">
             <img id="logo" src="{{ url_for('static', filename='img/eat_healthy_logo.png') }}" alt="healthy food logo">
             <h1>Eat Healthy</h1>
         </a>
         <input type="search" placeholder="Search...">
-        
+
         {% if current_user.is_anonymous %}
-        <a href="{{ url_for('login') }}">
+        <a href="{{ url_for('auth.login') }}">
             <img id="user" src="{{ url_for('static', filename='img/person-fill.svg') }}" alt="user icon">
         {% else %}
-        <a id="avatar-circle" href="{{ url_for('profile', username=current_user.username) }}">
+        <a id="avatar-circle" href="{{ url_for('main.profile', username=current_user.username) }}">
             <img id="nav-avatar" src="{{ url_for('static', filename='img/photo.png') }}" alt="user avatar">
             <!-- <img id="user" src="data:image/png;base64{{current_user.avatar}}" alt="user avatar"> -->
         {% endif %}
@@ -38,9 +38,9 @@
         Eat Healthy:
         <a href="{{ url_for('index') }}">Home</a>
         {% if current_user.is_anonymous %}
-        <a href="{{ url_for('login') }}">Login</a>
+        <a href="{{ url_for('auth.login') }}">Login</a>
         {% else %}
-        <a href="{{ url_for('logout') }}">Logout</a>
+        <a href="{{ url_for('auth.logout') }}">Logout</a>
         {% endif %}
     </div>
     <hr>
@@ -53,6 +53,7 @@
     </ul>
     {% endif %}
     {% endwith %} -->
-    {% block content %}{% endblock %}
+    {% block content %}
+    {% endblock %}
 </body>
 </html>

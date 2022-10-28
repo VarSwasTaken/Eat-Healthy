@@ -23,10 +23,11 @@
                 {{ form.remember_me() }}
                 {{ form.remember_me.label }}
             </div>
+            {% include 'components/flash_messages.html' %}
             <div class="w-100">
                 {{ form.submit() }}
             </div>
         </form>
-        <a id="register" href="{{ url_for('register') }}">New User? Register now!</a>
+        <a id="register" href="{{ url_for('auth.register') }}">New User? Register now!</a>
     </div>
 {% endblock %}

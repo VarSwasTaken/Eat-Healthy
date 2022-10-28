@@ -6,7 +6,7 @@
 {% block content %}
 <h1>Most recent articles</h1>
 {% if not current_user.is_anonymous %}
-<a href="{{ url_for('post')}}">Add an article</a>
+<a href="{{ url_for('main.post')}}">Add an article</a>
 {% endif %}
 
 
