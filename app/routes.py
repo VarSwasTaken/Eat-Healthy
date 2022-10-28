@@ -78,7 +78,8 @@ def edit(author, url):
     
     form = CreatePostForm()
     post = Post.query.filter_by(url=url).join(User).filter_by(username=author).first()
-    # form.content.data = post.content_html
+    if request.method == 'GET':
+        form.content.data = post.content_html
     if form.validate_on_submit():
         post.title = form.title.data
         post.description = form.description.data
