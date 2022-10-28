@@ -25,16 +25,6 @@
   {{ form.description(size=32, value=description) }}<br>
 
   {% for error in form.description.errors %}
-<<<<<<< HEAD
-  <span style="color: red">[{{ error }}]</span>
-  {% endfor %}
-
-  {{ form.url.label }}<br>
-  {{ form.url(value=url) }}<br>
-
-  {% for error in form.url.errors %}
-  <span style="color: red">[{{ error }}]</span>
-=======
   <span class="error">{{ error }}</span>
   {% endfor %}
 
@@ -43,7 +33,6 @@
 
   {% for error in form.url.errors %}
   <span class="error">{{ error }}</span>
->>>>>>> bb1a71411e18f4fdd617de1d1e6938c869c4f323
   {% endfor %}
 
   {{ form.content.label }}<br>

@@ -1,6 +1,5 @@
 from datetime import datetime
 from app.db import db
-# from flask import current_app
 from app import login
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
@@ -33,6 +32,7 @@ class User(UserMixin, db.Model):
     def format_date(self):
         string = self.account_created.strftime("%d-%m-%Y")
         return string
+
 
 @login.user_loader
 def load_user(id):

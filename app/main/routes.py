@@ -1,5 +1,5 @@
 
-from flask import render_template, flash, redirect, request, url_for
+from flask import render_template, flash, redirect, request, url_for, current_app
 from app.main import bp
 from app.db import db
 from app.main.forms import CreatePostForm
@@ -9,12 +9,14 @@ from app.models.user import User
 from app.models.post import Post
 
 
+
+
 @bp.route('/')
 # @app.route('/index')
 def index():
     page = request.args.get('page', 1, type=int)
     posts = Post.query.order_by(Post.article_published.desc()).paginate(
-        page=page, per_page=bp.config['POSTS_PER_PAGE'], error_out=False)
+        page=page, per_page=current_app.config['POSTS_PER_PAGE'], error_out=False)
 
     next_url = url_for('main.index', page=posts.next_num) \
         if posts.has_next else None
@@ -62,7 +64,7 @@ def profile(username):
 
     page = request.args.get('page', 1, type=int)
     posts = Post.query.join(User).filter_by(username=username).order_by(Post.article_published.desc()).paginate(
-        page=page, per_page=bp.config['POSTS_PER_PAGE'], error_out=False)
+        page=page, per_page=current_app.config['POSTS_PER_PAGE'], error_out=False)
 
     next_url = username + '?page=' + str(posts.next_num) \
         if posts.has_next else None
@@ -121,7 +123,7 @@ def admin():
 
     page = request.args.get('page', 1, type=int)
     posts = Post.query.order_by(Post.article_published.desc()).paginate(
-        page=page, per_page=bp.config['POSTS_PER_PAGE'], error_out=False)
+        page=page, per_page=current_app.config['POSTS_PER_PAGE'], error_out=False)
 
     next_url = url_for('main.admin', page=posts.next_num) \
         if posts.has_next else None
