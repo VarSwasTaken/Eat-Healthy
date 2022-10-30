@@ -1,8 +1,12 @@
 {% extends "base.html" %}
 
+{% block head %}
+    <script defer src="{{ url_for('static', filename='js/navigateArticles.js') }}"></script>
+{% endblock %}
+
 {% block content %}
     <main class="form-content">
-        <h1>Sign In</h1>
+        <h1>Change your Profile</h1>
         <form action="" method="post" novalidate>
             {{ form.hidden_tag() }}
             <div class="w-100">
@@ -19,15 +23,24 @@
                 <span class="error">{{ error }}</span>
                 {% endfor %}
             </div>
-            <div class="hor-center">
-                {{ form.remember_me() }}
-                {{ form.remember_me.label }}
+            <div class="w-100">
+                {{ form.password2.label }}<br>
+                {{ form.password2(size=32) }}<br>
+                {% for error in form.password2.errors %}
+                <span class="error">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div class="w-100">
+                {{ form.avatar.label }}<br>
+                {{ form.avatar(size=32) }}<br>
+                {% for error in form.avatar.errors %}
+                <span class="error">{{ error }}</span>
+                {% endfor %}
             </div>
             {% include 'components/flash_messages.html' %}
             <div class="w-100">
                 {{ form.submit() }}
             </div>
         </form>
-        <a id="register" href="{{ url_for('auth.register') }}">New User? Register now!</a>
     </main>
 {% endblock %}

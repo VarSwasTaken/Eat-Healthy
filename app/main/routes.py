@@ -1,8 +1,8 @@
 
-from flask import render_template, flash, redirect, request, url_for, current_app
+from flask import render_template, flash, redirect, request, url_for, current_app, abort
 from app.main import bp
 from app.db import db
-from app.main.forms import CreatePostForm
+from app.main.forms import CreatePostForm, ChangeCridentialsForm
 from flask_login import current_user, login_required
 
 from app.models.user import User
@@ -57,6 +57,7 @@ def article(author, url):
 @bp.route('/profile/<username>')
 def profile(username):
     user = User.query.filter_by(username=username).first_or_404()
+
     # posts = [
     #     {'author': user, 'body': 'Test post #1'},
     #     {'author': user, 'body': 'Test post #2'}
@@ -73,12 +74,29 @@ def profile(username):
 
     return render_template('profile.html', user=user, posts=posts.items, next_url=next_url, prev_url=prev_url)
 
+@bp.route('/profile/<username>/edit')
+def edit_profile(username):
+    if current_user.username != username:
+        return abort(403)
+    form = ChangeCridentialsForm()
+    # if form.validate_on_submit():
+    #     user = User.query.filter_by(username=form.username.data).first()
+    #     if user is None or not user.check_password(form.password.data):
+    #         flash('Invalid username or password')
+    #         return redirect(url_for('auth.login'))
+    #     login_user(user, remember=form.remember_me.data)
+    #     next_page = request.args.get('next')
+    #     if not next_page or url_parse(next_page).netloc != '':
+    #         next_page = url_for('main.index')
+    #     return redirect(next_page)
+    return render_template('edit-profile.html', title='Edit Profile', form=form)
+    # return render_template('auth/login.html', title='Sign In', form=form)
 
 @bp.route('/<author>/<url>/edit', methods=['GET', 'POST'])
 @login_required
 def edit(author, url):
     if author != current_user.username and not current_user.admin:
-        return redirect(url_for('mian.index'))
+        return redirect(url_for('main.index'))
 
     form = CreatePostForm()
     post = Post.query.filter_by(url=url).join(

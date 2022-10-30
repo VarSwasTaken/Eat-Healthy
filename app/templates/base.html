@@ -29,7 +29,7 @@
             <img id="user" src="{{ url_for('static', filename='img/person-fill.svg') }}" alt="user icon">
         {% else %}
         <a id="avatar-circle" href="{{ url_for('main.profile', username=current_user.username) }}">
-            <img id="nav-avatar" src="{{ url_for('static', filename='img/photo.png') }}" alt="user avatar">
+            <img id="nav-avatar" src="{{ url_for('static', filename='img/default_logo.png') }}" alt="user avatar">
             <!-- <img id="user" src="data:image/png;base64{{current_user.avatar}}" alt="user avatar"> -->
         {% endif %}
         </a>
