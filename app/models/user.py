@@ -11,7 +11,7 @@ class User(UserMixin, db.Model):
     password_hash = db.Column(db.String(128))
     account_created = db.Column(db.DateTime, default=datetime.utcnow())
     admin = db.Column(db.Boolean, default=False)
-    # avatar = db.Column(db.BLOB)
+    avatar = db.Column(db.String())
     posts = db.relationship('Post', backref='author', lazy='dynamic')
 
 
