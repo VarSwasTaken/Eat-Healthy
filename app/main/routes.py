@@ -1,10 +1,11 @@
-
 from flask import render_template, flash, redirect, request, url_for, current_app, abort
 from app.main import bp
 from app.db import db
 from app.main.forms import CreatePostForm, ChangeCridentialsForm
 from flask_login import current_user, login_required
-
+from werkzeug.utils import secure_filename
+import uuid as uuid
+import os
 from app.models.user import User
 from app.models.post import Post
 
@@ -74,23 +75,33 @@ def profile(username):
 
     return render_template('profile.html', user=user, posts=posts.items, next_url=next_url, prev_url=prev_url)
 
-@bp.route('/profile/<username>/edit')
-def edit_profile(username):
-    if current_user.username != username:
+@bp.route('/profile/<username>/edit', methods=['GET', 'POST'])
+def editprofile(username):
+    if current_user.username != username and not current_user.admin:
         return abort(403)
+
     form = ChangeCridentialsForm()
-    # if form.validate_on_submit():
-    #     user = User.query.filter_by(username=form.username.data).first()
-    #     if user is None or not user.check_password(form.password.data):
-    #         flash('Invalid username or password')
-    #         return redirect(url_for('auth.login'))
-    #     login_user(user, remember=form.remember_me.data)
-    #     next_page = request.args.get('next')
-    #     if not next_page or url_parse(next_page).netloc != '':
-    #         next_page = url_for('main.index')
-    #     return redirect(next_page)
-    return render_template('edit-profile.html', title='Edit Profile', form=form)
-    # return render_template('auth/login.html', title='Sign In', form=form)
+    user = User.query.filter_by(username=username).first()
+    if form.validate_on_submit():
+        if not user.check_password(form.currentPassword.data):
+            flash('Invalid password')
+            return redirect(url_for('main.editprofile', username=current_user.username))
+        if len(form.username.data) > 0:
+            user.username = form.username.data
+        if len(form.password.data) > 0 and len(form.password2.data) > 0:
+            user.set_password(form.password.data)
+        avatar = request.files['avatar']
+        if avatar.filename != '':
+            file_ext = os.path.splitext(avatar.filename)[1]
+            filename = "user" + str(current_user.id) + file_ext
+            avatar.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
+            # avatar.save(os.path.join('static/img/uploads', filename))
+            user.avatar = filename
+        # user.avatar = avatar.filename
+        # avatar.save(os.path.join('static/img/uploads', avatar.filename))
+        db.session.commit()
+        return redirect(url_for('main.profile', username=current_user.username))
+    return render_template('edit-profile.html', title="Edit Profile", form=form, user=user)
 
 @bp.route('/<author>/<url>/edit', methods=['GET', 'POST'])
 @login_required

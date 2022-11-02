@@ -7,11 +7,18 @@
 {% block content %}
     <main class="form-content">
         <h1>Change your Profile</h1>
-        <form action="" method="post" novalidate>
+        <form action="" method="post" novalidate enctype="multipart/form-data">
             {{ form.hidden_tag() }}
             <div class="w-100">
+                {{ form.currentPassword.label }}<br>
+                {{ form.currentPassword(size=32) }}<br>
+                {% for error in form.currentPassword.errors %}
+                <span class="error">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div class="w-100">
                 {{ form.username.label }}<br>
-                {{ form.username(size=32) }}<br>
+                {{ form.username(size=32, placeholder=current_user.username) }}<br>
                 {% for error in form.username.errors %}
                 <span class="error">{{ error }}</span>
                 {% endfor %}
@@ -31,8 +38,11 @@
                 {% endfor %}
             </div>
             <div class="w-100">
-                {{ form.avatar.label }}<br>
-                {{ form.avatar(size=32) }}<br>
+                {{ form.avatar.label }}
+                <label class="w-100 file">
+                    {{ form.avatar }}
+                    <span class="file-custom">{{ user.avatar }}</span>
+                </label>
                 {% for error in form.avatar.errors %}
                 <span class="error">{{ error }}</span>
                 {% endfor %}

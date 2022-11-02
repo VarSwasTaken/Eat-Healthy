@@ -38,12 +38,8 @@ def register():
         return redirect(url_for('main.index'))
     form = RegistrationForm()
     if form.validate_on_submit():
-        # photo = Undefined
-        # with open(os.path.dirname('static/img/default_logo.png'), 'rb') as file:
-        #     photo = file.read()
         user = User(username=form.username.data, email=form.email.data)
         user.set_password(form.password.data)
-        # user.set_photo(url_for('static', filename='img/default_logo.png'))
         db.session.add(user)
         db.session.commit()
         login_user(user)

@@ -23,11 +23,6 @@ class User(UserMixin, db.Model):
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
-
-    # def set_photo(self, path):
-    #     # filename = path
-    #     with open(path, 'rb') as file:
-    #         self.avatar = file.read()
    
     def format_date(self):
         string = self.account_created.strftime("%d-%m-%Y")
